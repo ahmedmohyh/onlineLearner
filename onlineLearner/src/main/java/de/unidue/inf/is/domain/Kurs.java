@@ -1,10 +1,11 @@
 package de.unidue.inf.is.domain;
 
+//Alle Kurs Daten
+
 public class Kurs {
 	
 	private int kid, freiePlaetze, ersteller;
-	private String beschreibungstext, schluessel, name;
-	
+	private String beschreibungstext, schluessel, name;	
 	
 	public int getKid() {
 		return kid;
