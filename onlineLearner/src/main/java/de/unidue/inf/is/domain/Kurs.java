@@ -5,7 +5,7 @@ package de.unidue.inf.is.domain;
 public class Kurs {
 	
 	private int kid, freiePlaetze, ersteller;
-	private String beschreibungstext, schluessel, name;	
+	private String beschreibungstext, schluessel, name , ersteller_name;
 	
 	public int getKid() {
 		return kid;
@@ -43,5 +43,12 @@ public class Kurs {
 	public void setName(String name) {
 		this.name = name;
 	}
+	public void setErsteller_name (String n){
+		ersteller_name = n;
 
+	}
+
+	public String getErsteller_name() {
+		return ersteller_name;
+	}
 }

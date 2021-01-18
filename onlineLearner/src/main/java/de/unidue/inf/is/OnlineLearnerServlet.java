@@ -27,6 +27,7 @@ public final class OnlineLearnerServlet extends HttpServlet {
 
         if (databaseExists) {
             request.setAttribute("db2exists", "vorhanden! Supi!");
+            //request.setAttribute("Ahmed","good");
         }
         else {
             request.setAttribute("db2exists", "nicht vorhanden :-(");

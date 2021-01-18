@@ -16,7 +16,7 @@ import de.unidue.inf.is.domain.User;
 /**
  * Einfaches Beispiel, das die Vewendung der Template-Engine zeigt.
  */
-public final class HelloServlet extends HttpServlet {
+public class HelloServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 

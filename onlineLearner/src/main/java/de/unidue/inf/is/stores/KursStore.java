@@ -27,31 +27,56 @@ public final class KursStore implements Closeable {
 			throw new StoreException(e);
 		}
 	}
-	
+
 	public ArrayList<Kurs> getAvailableCourses() throws StoreException
 	{
 		ArrayList<Kurs> result = new ArrayList<>();
 		try {
-			PreparedStatement pstmt = connection.prepareStatement("select k.name, k.freiePlaetze, b.name from kurs k join benutzer b on b.bnummer=k.ersteller where k.freiePlaetze>0");
+			//PreparedStatement pstmt = connection.prepareStatement("select * from kurs");
+			PreparedStatement pstmt = connection.prepareStatement("select k.name as Kurs_name, k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer=k.ersteller where k.freiePlaetze>0");
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Kurs k = new Kurs();
-				k.setName(rs.getString("name"));
-				k.setErsteller(rs.getInt("ersteller"));
+				k.setName(rs.getString("kurs_name"));
 				k.setFreiePlaetze(rs.getInt("freiePlaetze"));
+				k.setErsteller_name(rs.getString("name"));
 				result.add(k);
 			}
 		} catch(SQLException e) {
 			throw new StoreException(e);
 		}
+
 		return result;
 	}
-
+	public void complete() {
+		complete = true;
+	}
 
 	@Override
 	public void close() throws IOException {
-		// TODO Auto-generated method stub
-		
+		if (connection != null) {
+			try {
+				if (complete) {
+					connection.commit();
+				}
+				else {
+					connection.rollback();
+				}
+			}
+			catch (SQLException e) {
+				throw new StoreException(e);
+			}
+			finally {
+				try {
+					connection.close();
+				}
+				catch (SQLException e) {
+					throw new StoreException(e);
+				}
+			}
+		}
 	}
 
 }
+
+
