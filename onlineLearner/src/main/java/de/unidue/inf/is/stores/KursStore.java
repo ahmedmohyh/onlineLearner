@@ -48,23 +48,30 @@ public final class KursStore implements Closeable {
 
 		return result;
 	}
-	public void complete() {
-		complete = true;
-	}
 	
 	public void createNewCourse(Kurs k) throws StoreException{
 		try {
-			PreparedStatement pstmt = connection.prepareStatement("insert intp dbp155.kurs (name, beschreibungstext, einschreibeschluessel, freiePlaetze, ersteller) values (?, ?, ?, ?, ?)");
+			PreparedStatement pstmt = connection.prepareStatement("insert into dbp155.kurs (name, beschreibungstext, einschreibeschluessel, freiePlaetze, ersteller) values (?, ?, ?, ?, ?)");
 			pstmt.setString(1,  k.getName());
 			pstmt.setString(2, k.getBeschreibungstext());
 			pstmt.setString(3, k.getSchluessel());
 			pstmt.setInt(4, k.getFreiePlaetze());
 			pstmt.setInt(5, k.getErsteller());
+			pstmt.executeUpdate();
 		} catch(SQLException e) {
 			throw new StoreException(e);
 		}
 	}
 
+	
+	
+	
+	
+	
+	public void complete() {
+		complete = true;
+	}
+	
 	@Override
 	public void close() throws IOException {
 		if (connection != null) {

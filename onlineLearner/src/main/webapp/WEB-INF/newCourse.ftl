@@ -41,7 +41,7 @@
   }
  </style>
   <body>
-    
+  <form action="/new_course_created?user=1" method="POST"> 
     <div id="title">
       <p style="color: blue; font-size: 40px">
         	Kurs erstellen
@@ -65,10 +65,10 @@
     
     <div id="description">
       Beschreibung
-      <textarea id="description" name="description"></textarea>
+      <textarea id="description_field" name="description"></textarea>
     </div>
     
     <input type="submit" value="Erstellen"/>
-    
+  </form>  
   </body>
 </html>

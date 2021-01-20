@@ -97,4 +97,12 @@
 		<servlet-name>NewCourse</servlet-name>
 		<url-pattern>/new_course</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewCourseCreated</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewCourseCreatedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewCourseCreated</servlet-name>
+		<url-pattern>/new_course_created</url-pattern>
+	</servlet-mapping>
 </web-app>
