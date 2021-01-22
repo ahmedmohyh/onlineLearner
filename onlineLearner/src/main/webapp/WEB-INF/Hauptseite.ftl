@@ -41,18 +41,8 @@
         color : black;
         font-size: 25px;
       }
-    input{
-        float: right;
-        color: white;
-        background-color: blue;
-        size: 50px;
-        font-size:25px;
-        position: absolute;
-        height: 51px;
-        width : 365px;
-        top :600px;
-        left: 1100px;
-    }
+
+
 
 </style>
 <body>
@@ -64,6 +54,24 @@
 <div id="sec">
     <p style="color:red; font-size: 25px ; font-weight: bold">Meine Kurse</p>
 </div>
+<div>
+    <#list meine as my_list >
+        <div id="my_block" >
+            <form name="view_course" action ="/view_kurs?ks=${my_list.kid}" method="post">
+            <div>
+                ${my_list.name}
+            </div>
+            <div>
+                Ersteller: ${my_list.ersteller_name}
+            </div>
+            <div>
+                Freie plätze: ${my_list.freiePlaetze}
+            </div>
+                <input type="submit" value="view" style="margin-right: 20px ;color: white; background-color: green; size: 25px; font-size: 18px; float: right;" />
+            </form>
+        </div>
+    </#list>
+</div>
 <br>
 <div id="sec">
     <p style="color:green; font-size: 25px ; font-weight: bold">Verfügbare Kurse</p>
@@ -72,6 +80,7 @@
 <div>
     <#list avail as my_list >
         <div id="my_block" >
+        <form name="view_course" action ="/view_kurs?ks=${my_list.kid}" method="post">
             <div>
                 ${my_list.name}
             </div>
@@ -82,14 +91,24 @@
                 Freie plätze: ${my_list.freiePlaetze}
             </div>
 
+        <input type="submit" value="view" style="margin-right: 20px ;color: white; background-color: green; size: 25px; font-size: 18px; float: right;" />
+        </form>
         </div>
     </#list>
 </div>
 <br>
 <div>
-    <form name="user" action="hello" method="post">
-
-        <input style="margin-right: 600px" type="submit" value="Kurs Erstellen" class = "btn btn-primary" style = "margin-bottom:10px" />
+    <form name="newcourse" action ="/new_course" method="get">
+        <input style="margin-right: 300px;   float: right;
+        color: white;
+        background-color: blue;
+        size: 50px;
+        font-size:25px;
+        position: absolute;
+        height: 51px;
+        width : 365px;
+        top :630px;
+        left: 1100px; " type="submit" value="Kurs Erstellen" class = "btn btn-primary" style = "margin-bottom:10px" />
     </form>
 </div>
 </body>

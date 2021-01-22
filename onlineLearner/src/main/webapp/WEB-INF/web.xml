@@ -105,4 +105,12 @@
 		<servlet-name>NewCourseCreated</servlet-name>
 		<url-pattern>/new_course_created</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>viewkurs_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.viewkurs_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewkurs_servlet</servlet-name>
+		<url-pattern>/view_kurs</url-pattern>
+	</servlet-mapping>
 </web-app>
