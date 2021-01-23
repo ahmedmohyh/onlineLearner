@@ -36,24 +36,19 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Put the user list in request and let freemarker paint it.
         request.setAttribute("users", userList);
-
         request.getRequestDispatcher("/index.ftl").forward(request, response);
     }
 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
-                    IOException {
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
 
         if (null != firstname && null != lastname && !firstname.isEmpty() && !lastname.isEmpty()) {
-
             synchronized (userList) {
                 userList.add(new User(firstname, lastname));
             }
-
         }
 
         doGet(request, response);

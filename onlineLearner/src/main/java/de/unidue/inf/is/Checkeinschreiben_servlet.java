@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import  de.unidue.inf.is.stores.KursStore;
+import de.unidue.inf.is.stores.KursStore;
 import de.unidue.inf.is.stores.UserStore;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -40,39 +40,36 @@ public class Checkeinschreiben_servlet extends HttpServlet {
 		try {
 			if (ks.ist_eingeschrieben(KID)) {
 				msg = "You are already registered for this course";
-			}
-			else if (k.getFreiePlaetze()<=0){
+			} else if (k.getFreiePlaetze()<=0){
 				msg ="All places are already taken try next semester!";
-			}
-			else if (k.getSchluessel()!=null){
+			} else if (k.getSchluessel()!=null){
 				String kKey;
 				kKey = request.getParameter("key");
-				if (request.getParameter("key")==""){
+
+				if (request.getParameter("key").equals("")){
 					msg = "You have to enter a key";
-				}
-				else if (!k.getSchluessel().equals(kKey)){
+				} else if (!k.getSchluessel().equals(kKey)){
 					msg = "Incorrect key";
-				}
-				else {
+				} else {
 					msg= "You are now registered";
 				}
-			}
-			else {
+			} else {
 				msg= "You are now registered";
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-if (msg.equals("You are now registered")){
-	try {
-		ks.sich_einschreiben(k);
-		ks.complete();
-	} catch (SQLException e) {
-		e.printStackTrace();
-	} finally {
-		ks.close();
-	}
-}
-		doGet(request, response);
+
+		if (msg.equals("You are now registered")){
+			try {
+				ks.sich_einschreiben(k);
+				ks.complete();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				ks.close();
+			}
+		}
+	doGet(request, response);
 	}
 }

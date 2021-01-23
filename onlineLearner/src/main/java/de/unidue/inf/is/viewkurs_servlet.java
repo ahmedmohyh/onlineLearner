@@ -12,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 public class viewkurs_servlet extends HttpServlet {
     KursStore ks = new KursStore();
     Kurs k = new Kurs();
@@ -34,8 +35,7 @@ public class viewkurs_servlet extends HttpServlet {
               k = ks.get_kurs(KID);
               System.out.println(k.getName());
               doGet(request,response);
-          }
-          else {
+          } else {
               System.out.println("eingeschrieben");
               k = ks.get_kurs(KID);
               System.out.println(k.getName());
@@ -45,7 +45,6 @@ public class viewkurs_servlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
 }

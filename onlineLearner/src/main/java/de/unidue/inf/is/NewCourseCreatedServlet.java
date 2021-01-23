@@ -18,21 +18,20 @@ public class NewCourseCreatedServlet extends HttpServlet {
 	private static String[] errorMessage = 
 		{
 				"Kurs erfolgreich erstellt.",
-				"Länge des Namen nicht korrekt (Name muss zwischen 1 und 50 Zeichen lang sein",
+				"Länge des Namen nicht korrekt (Name muss zwischen 1 und 50 Zeichen lang sein)",
 				"Angabe der freien Plätze ist keine Zahl",
 				"Freie Plätze darf höchstens den Wert 100 haben",
 				"Keine Beschreibung angegeben"
 		};
-	
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setAttribute("error", errorMessageString);
 		request.getRequestDispatcher("/newCourseCreated.ftl").forward(request, response);
 	}
 	
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ks = new KursStore();
 		Kurs k = new Kurs();
 		errorMessageString = errorMessage[0];
@@ -52,7 +51,7 @@ public class NewCourseCreatedServlet extends HttpServlet {
 		if(kFreePlaces > 100) {
 			errorMessageString = errorMessage[3];
 		}
-		if(request.getParameter("description")=="") {
+		if(request.getParameter("description").equals("")) {
 			errorMessageString = errorMessage[4];
 		} else {
 			k.setBeschreibungstext(request.getParameter("description"));
@@ -77,7 +76,6 @@ public class NewCourseCreatedServlet extends HttpServlet {
 			ks.complete();
 			ks.close();
 		}
-		
 		
 		doGet(request, response);
 	}

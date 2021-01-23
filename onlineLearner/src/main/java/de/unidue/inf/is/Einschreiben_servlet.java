@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 public class Einschreiben_servlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     Kurs k = new Kurs();
@@ -20,7 +21,6 @@ public class Einschreiben_servlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setAttribute("my_k",k);
         request.getRequestDispatcher("/new_enroll.ftl").forward(request, response);
     }

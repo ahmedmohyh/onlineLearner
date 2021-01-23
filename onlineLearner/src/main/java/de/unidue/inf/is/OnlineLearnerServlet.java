@@ -10,26 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 import de.unidue.inf.is.utils.DBUtil;
 
 
-
 /**
  * Das könnte die Eintrittsseite sein.
  */
-public final class OnlineLearnerServlet extends HttpServlet {
 
+public final class OnlineLearnerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-                    throws ServletException, IOException {
-  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean databaseExists = DBUtil.checkDatabaseExistsExternal();
 
         if (databaseExists) {
             request.setAttribute("db2exists", "vorhanden! Supi!");
             //request.setAttribute("Ahmed","good");
-        }
-        else {
+        } else {
             request.setAttribute("db2exists", "nicht vorhanden :-(");
         }
 
