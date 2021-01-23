@@ -113,4 +113,28 @@
 		<servlet-name>viewkurs_servlet</servlet-name>
 		<url-pattern>/view_kurs</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Einschreiben_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.Einschreiben_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Einschreiben_servlet</servlet-name>
+		<url-pattern>/Kurs_Einschreiben</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Checkeinschreiben_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.Checkeinschreiben_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Checkeinschreiben_servlet</servlet-name>
+		<url-pattern>/check_einschreiben</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Kurs_details</servlet-name>
+		<servlet-class>de.unidue.inf.is.Kurs_details</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Kurs_details</servlet-name>
+		<url-pattern>/kurs_details</url-pattern>
+	</servlet-mapping>
 </web-app>

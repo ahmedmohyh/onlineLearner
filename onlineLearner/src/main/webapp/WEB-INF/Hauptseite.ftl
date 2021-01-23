@@ -104,10 +104,10 @@
         background-color: blue;
         size: 50px;
         font-size:25px;
-        position: absolute;
+
         height: 51px;
         width : 365px;
-        top :630px;
+       float: right;
         left: 1100px; " type="submit" value="Kurs Erstellen" class = "btn btn-primary" style = "margin-bottom:10px" />
     </form>
 </div>

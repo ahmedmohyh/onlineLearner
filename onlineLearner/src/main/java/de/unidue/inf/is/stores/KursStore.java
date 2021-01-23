@@ -65,6 +65,26 @@ public final class KursStore implements Closeable {
 			throw new StoreException(e);
 		}
 	}
+	public void sich_einschreiben (Kurs k) throws StoreException, SQLException {
+		String s = Integer.toString(k.getKid());
+		try {
+			connection.setAutoCommit(false);
+			PreparedStatement pstmt = connection.prepareStatement("insert into dbp155.einschreiben (bnummer, kid) values (?,?)");
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2,k.getKid());
+			pstmt.executeUpdate();
+			pstmt = connection.prepareStatement("update dbp155.kurs k Set k.freiePlaetze = k.freiePlaetze-1 where k.kid = "+s);
+			pstmt.executeUpdate();
+			connection.commit();
+		}catch (SQLException e){
+			connection.rollback();
+			throw new StoreException(e);
+		}
+		finally {
+			connection.setAutoCommit(true);
+		}
+
+	}
 	public ArrayList<Kurs> get_my_courses () throws StoreException {
 		ArrayList<Kurs> result = new ArrayList<>();
 		try {
@@ -116,12 +136,15 @@ public Kurs get_kurs (int KID) throws StoreException ,  SQLException{
 		Kurs k = new Kurs();
 	String s = Integer.toString(KID);
 	try {
-		PreparedStatement pstmt = connection.prepareStatement("select k.name, k.freiePlaetze from dbp155.kurs k where k.kid= " + s);
+		PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= " + s);
 		ResultSet rs = pstmt.executeQuery();
 		k.setKid(KID);
 		while (rs.next()) {
-			k.setName(rs.getString("name"));
+			k.setName(rs.getString("kname"));
 			k.setFreiePlaetze(rs.getInt("freiePlaetze"));
+			k.setBeschreibungstext(rs.getString("beschreibungstext"));
+			k.setErsteller_name(rs.getString("name"));
+			k.setSchluessel(rs.getString("einschreibeschluessel"));
 		}
 
 
