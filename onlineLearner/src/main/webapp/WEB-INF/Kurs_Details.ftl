@@ -62,17 +62,19 @@
 	<hr size="3" width="100%" color="black" >
 </di>
 <div>
-	<table class="datatable">
+	<table class="datatable" >
 		<tr>
-			<th style="font-size: 25px; color: brown"> Aufgabe </th>
+			<th style="font-size: 25px; color: brown ;margin: 40px"> Aufgabe </th> <th style="font-size: 25px; color: brown ;margin: 20px; padding:30px"> Meine Abgabe </th>
 		</tr>
 		<#list my_auf_list as mylist>
 			<tr style="margin: auto">
 				<td style="font-size: 20px; color: blueviolet"> ${mylist.name}</td>
+				<td style="font-size: 20px; color: blueviolet"> ${mylist.abgabetext} </td>
 			</tr>
-
 		</#list>
 	</table>
+
 </div>
+
 </body>
 </html>
