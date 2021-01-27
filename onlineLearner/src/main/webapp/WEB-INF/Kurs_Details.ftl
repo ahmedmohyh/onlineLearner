@@ -29,7 +29,7 @@
 <div id="header1">
 	<h1> Informationen </h1>
 </div>
-<form name ="Einschreiben"action="view_main" method="post" >
+<form name ="KursDetails"action="delete_course?ks=${my_k.kid}" method="post" >
 	<div>
 		<div id="header">
 			<h1> ${my_k.name} </h1>
@@ -51,11 +51,23 @@
         background-color: RED;
         size: 50px;
         font-size:25px;
-        position: absolute;
         height: 51px;
         width : 250px;
         top :200px;
         left: 1150px; " type="submit" value="Kurs Löschen" class = "btn btn-primary" style = "margin-bottom:10px" />
+	</div>
+</form>
+<form name="ZurückZuStart" action="/view_main" method="get">
+	<div>
+		<input style="margin-right: 300px;   float: right;
+        color: white;
+        background-color: BLUE;
+        size: 50px;
+        font-size:25px;
+        height: 51px;
+        width : 250px;
+        top :200px;
+        left: 1150px; " type="submit" value="Startseite" class = "btn btn-primary" style = "margin-bottom:10px" />
 	</div>
 </form>
 <di>

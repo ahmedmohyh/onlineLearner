@@ -33,7 +33,19 @@ public class Einschreiben_servlet extends HttpServlet {
         int KID = Integer.parseInt(request.getParameter("ks"));
         try {
             k = ks.get_kurs(KID);
-            doGet(request, response);
+            System.out.println(k.getSchluessel());
+            if(k.getSchluessel() == null) {
+            	//Schreibe direkt ein
+            	ks.sich_einschreiben(k);
+            	ks.complete();
+            	ks.close();
+            	Kurs_details kd = new Kurs_details(k);
+            	kd.doPost(request, response);
+            }
+            else {
+            	ks.close();
+            	doGet(request, response);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

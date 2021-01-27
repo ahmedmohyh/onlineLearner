@@ -32,11 +32,9 @@ public class Checkeinschreiben_servlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int KID = Integer.parseInt(request.getParameter("ks"));
-		try {
-			k = ks.get_kurs(KID);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
+		k = ks.get_kurs(KID);
+		
 		try {
 			if (ks.ist_eingeschrieben(KID)) {
 				msg = "You are already registered for this course";
@@ -64,12 +62,16 @@ public class Checkeinschreiben_servlet extends HttpServlet {
 			try {
 				ks.sich_einschreiben(k);
 				ks.complete();
+				ks.close();
+				Kurs_details kd = new Kurs_details(k);
+	        	kd.doPost(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} finally {
-				ks.close();
 			}
 		}
-	doGet(request, response);
+		else {
+			ks.close();
+			doGet(request, response);
+		}
 	}
 }

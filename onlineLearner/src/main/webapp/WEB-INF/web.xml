@@ -137,4 +137,12 @@
 		<servlet-name>Kurs_details</servlet-name>
 		<url-pattern>/kurs_details</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>DeleteCourse</servlet-name>
+		<servlet-class>de.unidue.inf.is.DeleteCourseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteCourse</servlet-name>
+		<url-pattern>/delete_course</url-pattern>
+	</servlet-mapping>
 </web-app>

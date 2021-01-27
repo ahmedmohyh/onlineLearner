@@ -69,15 +69,16 @@ public final class KursStore implements Closeable {
             pstmt.setInt(1, 1);
             pstmt.setInt(2, k.getKid());
             pstmt.executeUpdate();
-            pstmt = connection.prepareStatement("update dbp155.kurs k Set k.freiePlaetze = k.freiePlaetze-1 where k.kid = " + s);
+            pstmt = connection.prepareStatement("update dbp155.kurs k Set k.freiePlaetze = k.freiePlaetze-1 where k.kid = ?");
+            pstmt.setString(1, s);
             pstmt.executeUpdate();
-            connection.commit();
+            //connection.commit();
         } catch (SQLException e) {
-            connection.rollback();
+            //connection.rollback();
             throw new StoreException(e);
-        } finally {
+        } /*finally {
             connection.setAutoCommit(true);
-        }
+        }*/
     }
 
     public ArrayList<Kurs> get_my_courses() throws StoreException {
@@ -106,7 +107,8 @@ public final class KursStore implements Closeable {
         String s = Integer.toString(kid);
 
         try {
-            PreparedStatement pstmt = connection.prepareStatement("select e.bnummer from dbp155.einschreiben e where e.kid = " + s);
+            PreparedStatement pstmt = connection.prepareStatement("select e.bnummer from dbp155.einschreiben e where e.kid = ?");
+            pstmt.setString(1, s);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 int_list.add(rs.getInt("bnummer"));
@@ -123,12 +125,12 @@ public final class KursStore implements Closeable {
         return des;
     }
 
-    public Kurs get_kurs(int KID) throws StoreException, SQLException {
+    public Kurs get_kurs(int KID) throws StoreException {
         // it will be used for the seak of getting a kurs to show it new enroll page.
         Kurs k = new Kurs();
         String s = Integer.toString(KID);
         try {
-            PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= " + s);
+            PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, k.ersteller, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= " + s);
             ResultSet rs = pstmt.executeQuery();
             k.setKid(KID);
             while (rs.next()) {
@@ -137,6 +139,7 @@ public final class KursStore implements Closeable {
                 k.setBeschreibungstext(rs.getString("beschreibungstext"));
                 k.setErsteller_name(rs.getString("name"));
                 k.setSchluessel(rs.getString("einschreibeschluessel"));
+                k.setErsteller(rs.getInt("ersteller"));
             }
         } catch (SQLException e) {
             throw new StoreException(e);
@@ -144,6 +147,65 @@ public final class KursStore implements Closeable {
         return k;
     }
 
+    public void deleteCourse(int KID) throws StoreException {
+    	try {
+    		PreparedStatement pstmt;
+    	
+    		//Abgabe ID's durch gegebene Kurs ID kriegen
+    		pstmt = connection.prepareStatement("SELECT e.aid FROM dbp155.einreichen e WHERE e.kid = ?");
+    		pstmt.setInt(1, KID);
+    		ResultSet rs = pstmt.executeQuery();
+    		List<Integer> aufgaben = new ArrayList<Integer>();
+    		while(rs.next()) {
+    			aufgaben.add(rs.getInt(0));
+    		}
+    	
+    		//Einträge aus Tabelle bewerten löschen
+    		for(Integer aid : aufgaben) {
+    			pstmt = connection.prepareStatement("DELETE FROM dbp155.bewerten b WHERE b.aid = ?");
+    			pstmt.setInt(1, aid);
+    			pstmt.executeUpdate();
+    		}
+    	
+    		//Einträge aus Tabelle abgabe löschen
+    		for(Integer aid : aufgaben) {
+    			pstmt = connection.prepareStatement("DELETE FROM dbp155.abgabe a WHERE a.aid = ?");
+    			pstmt.setInt(1, aid);
+    			pstmt.executeUpdate();
+    		}
+    	
+    		//Einträge aus Tabelle einreichen löschen
+    		for(Integer aid : aufgaben) {
+    			pstmt = connection.prepareStatement("DELETE FROM dbp155.einreichen e WHERE e.aid = ? AND e.kid = ?");
+    			pstmt.setInt(1, aid);
+    			pstmt.setInt(2, KID);
+    			pstmt.executeUpdate();
+    		}
+    	
+    		//Einträge aus Tabelle aufgabe löschen
+    		pstmt = connection.prepareStatement("DELETE FROM dbp155.aufgabe a WHERE a.kid = ?");
+    		pstmt.setInt(1, KID);
+    		pstmt.executeUpdate();
+    	
+    		//Einträge aus Tabelle einschreiben löschen
+    		pstmt = connection.prepareStatement("DELETE FROM dbp155.einschreiben k WHERE k.kid = ?");
+    		pstmt.setInt(1, KID);
+    		pstmt.executeUpdate();
+    	
+    		//Eintrag aus Tabelle Kurs löschen
+    		pstmt = connection.prepareStatement("DELETE FROM dbp155.kurs k WHERE k.kid = ?");
+    		pstmt.setInt(1, KID);
+    		pstmt.executeUpdate();
+    	} catch(SQLException e) {
+    		throw new StoreException(e);
+    	}
+    }
+    
+    
+    
+    
+    
+    
     public void complete() {
         complete = true;
     }

@@ -53,7 +53,7 @@ public class Kurs_details extends HttpServlet {
             int x = ee.getAnummer();
             for (Aufgabe a : af) {
                 if (a.getAnummer() == x) {
-                    if (ee.getAbgabetext() == "") {
+                    if (ee.getAbgabetext().equals("")) {
                         a.setAbgabetext("Keine Abgabe");
                     } else {
                         a.setAbgabetext(ee.getAbgabetext());
@@ -62,7 +62,7 @@ public class Kurs_details extends HttpServlet {
             }
         }
         for (Aufgabe a : af) {
-            if (a.getAbgabetext() == "") {
+            if (a.getAbgabetext().equals("")) {
                 a.setAbgabetext("Keine Abgabe");
             }
         }

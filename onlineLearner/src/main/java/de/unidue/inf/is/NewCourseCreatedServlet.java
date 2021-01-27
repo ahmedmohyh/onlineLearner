@@ -74,9 +74,8 @@ public class NewCourseCreatedServlet extends HttpServlet {
         if (errorMessageString.equals(errorMessage[0])) {
             ks.createNewCourse(k);
             ks.complete();
-            ks.close();
         }
-
+        ks.close();
         doGet(request, response);
     }
 }

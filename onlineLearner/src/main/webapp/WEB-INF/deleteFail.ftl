@@ -1,6 +1,6 @@
 <html>
 
-<head><title>New enroll done</title></head>
+<head><title>Delete failed</title></head>
 <style type="text/css">
 * { margin:0;
 		padding:0;
