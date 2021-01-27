@@ -28,6 +28,7 @@ public class AufgabeStore implements Closeable {
         }
     }
 
+    //Diese Methode "bringt" eine Aufgabe in den Kurs anhand eines Kurses k
     public ArrayList<Aufgabe> get_A_einesKurses(Kurs k) {
         ArrayList<Aufgabe> Af = new ArrayList<Aufgabe>();
         try {
@@ -46,6 +47,7 @@ public class AufgabeStore implements Closeable {
         return Af;
     }
 
+    //Diese Methode "bringt" die Abgaben die der Benutzer abgegeben hat
     public ArrayList<einreichen> get_abgabe_eineskurses(Kurs k) {
         ArrayList<einreichen> ei = new ArrayList<>();
 

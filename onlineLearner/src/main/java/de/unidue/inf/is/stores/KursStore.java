@@ -13,7 +13,6 @@ import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.utils.DBUtil;
 
 public final class KursStore implements Closeable {
-
     private Connection connection;
     private boolean complete;
 
