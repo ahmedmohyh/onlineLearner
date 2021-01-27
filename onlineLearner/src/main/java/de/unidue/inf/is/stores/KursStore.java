@@ -130,7 +130,8 @@ public final class KursStore implements Closeable {
         Kurs k = new Kurs();
         String s = Integer.toString(KID);
         try {
-            PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, k.ersteller, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= " + s);
+            PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, k.ersteller, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= ?");
+            pstmt.setString(1, s); //statt "+s" am Ende der SQL Anweisung
             ResultSet rs = pstmt.executeQuery();
             k.setKid(KID);
             while (rs.next()) {

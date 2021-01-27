@@ -52,28 +52,26 @@
 		<servlet-name>hello_servlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.HelloServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
 		<servlet-name>hello_servlet</servlet-name>
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>Hauptseite</servlet-name>
-		<servlet-class>de.unidue.inf.is.Hauptseite</servlet-class>
-	</servlet>
 
+	<servlet>
+		<servlet-name>HauptseiteServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.HauptseiteServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
-		<servlet-name>Hauptseite</servlet-name>
+		<servlet-name>HauptseiteServlet</servlet-name>
 		<url-pattern>view_main</url-pattern> 
 	</servlet-mapping>
 	
 	<servlet>
-		<servlet-name>onlineLearner_servlet</servlet-name>
+		<servlet-name>OnlineLearnerServlet</servlet-name>
 		<servlet-class>de.unidue.inf.is.OnlineLearnerServlet</servlet-class>
 	</servlet>
-
 	<servlet-mapping>
-		<servlet-name>onlineLearner_servlet</servlet-name>
+		<servlet-name>OnlineLearnerServlet</servlet-name>
 		<url-pattern>/onlineLearner</url-pattern>
 	</servlet-mapping>
 
@@ -89,6 +87,7 @@
 			<!-- Nobody is allowed to visit these -->
 		</auth-constraint>
 	</security-constraint>
+
 	<servlet>
 		<servlet-name>NewCourse</servlet-name>
 		<servlet-class>de.unidue.inf.is.NewCourseServlet</servlet-class>
@@ -97,6 +96,7 @@
 		<servlet-name>NewCourse</servlet-name>
 		<url-pattern>/new_course</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>NewCourseCreated</servlet-name>
 		<servlet-class>de.unidue.inf.is.NewCourseCreatedServlet</servlet-class>
@@ -105,38 +105,43 @@
 		<servlet-name>NewCourseCreated</servlet-name>
 		<url-pattern>/new_course_created</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
-		<servlet-name>viewkurs_servlet</servlet-name>
-		<servlet-class>de.unidue.inf.is.viewkurs_servlet</servlet-class>
+		<servlet-name>ViewCourseServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.ViewCourseServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>viewkurs_servlet</servlet-name>
-		<url-pattern>/view_kurs</url-pattern>
+		<servlet-name>ViewCourseServlet</servlet-name>
+		<url-pattern>/view_course</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
-		<servlet-name>Einschreiben_servlet</servlet-name>
-		<servlet-class>de.unidue.inf.is.Einschreiben_servlet</servlet-class>
+		<servlet-name>EinschreibServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.EinschreibServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Einschreiben_servlet</servlet-name>
-		<url-pattern>/Kurs_Einschreiben</url-pattern>
+		<servlet-name>EinschreibServlet</servlet-name>
+		<url-pattern>/new_enroll</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
-		<servlet-name>Checkeinschreiben_servlet</servlet-name>
-		<servlet-class>de.unidue.inf.is.Checkeinschreiben_servlet</servlet-class>
+		<servlet-name>EinschreibCheckServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.EinschreibCheckServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Checkeinschreiben_servlet</servlet-name>
+		<servlet-name>EinschreibCheckServlet</servlet-name>
 		<url-pattern>/check_einschreiben</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
-		<servlet-name>Kurs_details</servlet-name>
-		<servlet-class>de.unidue.inf.is.Kurs_details</servlet-class>
+		<servlet-name>DetailseiteServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.DetailseiteServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>Kurs_details</servlet-name>
+		<servlet-name>DetailseiteServlet</servlet-name>
 		<url-pattern>/kurs_details</url-pattern>
 	</servlet-mapping>
+
 	<servlet>
 		<servlet-name>DeleteCourse</servlet-name>
 		<servlet-class>de.unidue.inf.is.DeleteCourseServlet</servlet-class>
@@ -145,4 +150,5 @@
 		<servlet-name>DeleteCourse</servlet-name>
 		<url-pattern>/delete_course</url-pattern>
 	</servlet-mapping>
+
 </web-app>

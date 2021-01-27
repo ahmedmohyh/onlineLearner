@@ -57,7 +57,7 @@
 <div>
     <#list meine as my_list >
         <div id="my_block" >
-            <form name="view_course" action ="/view_kurs?ks=${my_list.kid}" method="post">
+            <form name="view_course" action ="/view_course?ks=${my_list.kid}" method="post">
             <div>
                 ${my_list.name}
             </div>
@@ -80,7 +80,7 @@
 <div>
     <#list avail as my_list >
         <div id="my_block" >
-        <form name="view_course" action ="/view_kurs?ks=${my_list.kid}" method="post">
+        <form name="view_course" action ="/view_course?ks=${my_list.kid}" method="post">
             <div>
                 ${my_list.name}
             </div>

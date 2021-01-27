@@ -1,20 +1,17 @@
 package de.unidue.inf.is;
 
-import de.unidue.inf.is.domain.Kurs;
-import de.unidue.inf.is.domain.User;
-import java.awt.event.MouseAdapter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+
+import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.KursStore;
-import de.unidue.inf.is.stores.UserStore;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class Checkeinschreiben_servlet extends HttpServlet {
+public class EinschreibCheckServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	Kurs k = new Kurs();
@@ -63,7 +60,7 @@ public class Checkeinschreiben_servlet extends HttpServlet {
 				ks.sich_einschreiben(k);
 				ks.complete();
 				ks.close();
-				Kurs_details kd = new Kurs_details(k);
+				DetailseiteServlet kd = new DetailseiteServlet(k);
 	        	kd.doPost(request, response);
 			} catch (SQLException e) {
 				e.printStackTrace();

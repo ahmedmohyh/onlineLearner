@@ -1,5 +1,5 @@
 <html>
-<head><title>Einschreibung Seite </title>
+<head><title>Einschreibung Seite</title>
     <style>
     * {
     margin:0;
@@ -29,7 +29,7 @@
 <div id="header1">
     <h1> Informationen </h1>
 </div>
-<form name ="Einschreiben"  action ="/Kurs_Einschreiben?ks=${my_k.kid}"  method ="post">
+<form name ="Einschreiben"  action ="/new_enroll?ks=${my_k.kid}"  method ="post">
     <div>
         <div id="header">
             <h1> ${my_k.name} </h1>

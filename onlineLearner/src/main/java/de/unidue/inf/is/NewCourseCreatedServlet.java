@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.KursStore;
 
+//Die Daten die auf die Seite eingegeben wurden, entgegebennehmen und überprüfen
 public class NewCourseCreatedServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
