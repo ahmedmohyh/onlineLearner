@@ -57,6 +57,15 @@
 		<servlet-name>hello_servlet</servlet-name>
 		<url-pattern>/hello</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>Hauptseite</servlet-name>
+		<servlet-class>de.unidue.inf.is.Hauptseite</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Hauptseite</servlet-name>
+		<url-pattern>main_page</url-pattern>
+	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>onlineLearner_servlet</servlet-name>
@@ -80,5 +89,52 @@
 			<!-- Nobody is allowed to visit these -->
 		</auth-constraint>
 	</security-constraint>
-
+	<servlet>
+		<servlet-name>NewCourse</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewCourseServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewCourse</servlet-name>
+		<url-pattern>/new_course</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewCourseCreated</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewCourseCreatedServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewCourseCreated</servlet-name>
+		<url-pattern>/new_course_created</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>viewkurs_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.viewkurs_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>viewkurs_servlet</servlet-name>
+		<url-pattern>/view_kurs</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Einschreiben_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.Einschreiben_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Einschreiben_servlet</servlet-name>
+		<url-pattern>/Kurs_Einschreiben</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Checkeinschreiben_servlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.Checkeinschreiben_servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Checkeinschreiben_servlet</servlet-name>
+		<url-pattern>/check_einschreiben</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Kurs_details</servlet-name>
+		<servlet-class>de.unidue.inf.is.Kurs_details</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Kurs_details</servlet-name>
+		<url-pattern>/kurs_details</url-pattern>
+	</servlet-mapping>
 </web-app>

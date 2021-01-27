@@ -29,7 +29,7 @@
 <div id="header1">
 	<h1> Informationen </h1>
 </div>
-<form name ="Einschreiben"action="main_page" method="post" >
+<form name ="Einschreiben"action="view_main" method="post" >
 	<div>
 		<div id="header">
 			<h1> ${my_k.name} </h1>

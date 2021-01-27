@@ -1,13 +1,15 @@
 package de.unidue.inf.is.domain;
 
 public class Aufgabe {
-    private int kid ;
+    private int kid;
     private int anummer;
     String name;
-    String beschreibung ;
-    String abgabetext ="";
- public Aufgabe () {
- }
+    String beschreibung;
+    String abgabetext = "";
+
+    public Aufgabe() {
+    }
+
     public void setKid(int kid) {
         this.kid = kid;
     }

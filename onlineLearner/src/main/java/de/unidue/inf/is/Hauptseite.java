@@ -7,7 +7,8 @@ import java.awt.event.MouseAdapter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import  de.unidue.inf.is.stores.KursStore;
+
+import de.unidue.inf.is.stores.KursStore;
 import de.unidue.inf.is.stores.UserStore;
 
 import javax.servlet.ServletException;
@@ -29,8 +30,8 @@ public class Hauptseite extends HttpServlet {
         ks.complete();
         ks.close();
 
-        request.setAttribute("avail",k);
-        request.setAttribute("meine",  k_mycourses);
+        request.setAttribute("avail", k);
+        request.setAttribute("meine", k_mycourses);
         request.getRequestDispatcher("/Hauptseite.ftl").forward(request, response);
     }
 

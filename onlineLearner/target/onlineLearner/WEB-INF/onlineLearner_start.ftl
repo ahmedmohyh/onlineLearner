@@ -14,7 +14,7 @@ body{
 #wrapper{
    width:960px;
    margin:0 auto;
-   text-align:left;
+   text-align:center;
    background-color: #fff;
    border-radius: 0 0 10px 10px;
    padding: 20px;
@@ -22,6 +22,7 @@ body{
 }
 
 #header{
+text-align: left;
  color: #fff;
  background-color: #2c5b9c;
  height: 3.5em;
@@ -32,6 +33,7 @@ body{
 #site{
     background-color: #fff;
     padding: 20px 0px 0px 0px;
+	text-align: left;
 }
 .centerBlock{
 	margin:0 auto;
@@ -41,13 +43,15 @@ body{
 <body>
 	<div id="wrapper">
 		<div id="header">
-		<h1> OnlineLearner Website </h1>
+		<h1> Online Learner </h1>
 		</div>
 	   
 		<div id="site">
 		<p>
 			Die Datenbank learner ist ${db2exists}
+
 		</p>
+
 		</div>
 	</div>
 </body>

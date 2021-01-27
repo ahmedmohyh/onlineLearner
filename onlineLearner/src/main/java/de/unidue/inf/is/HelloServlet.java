@@ -11,15 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import de.unidue.inf.is.domain.User;
 
-
-
 /**
  * Einfaches Beispiel, das die Vewendung der Template-Engine zeigt.
  */
+
 public class HelloServlet extends HttpServlet {
-
     private static final long serialVersionUID = 1L;
-
     private static List<User> userList = new ArrayList<>();
 
     // Just prepare static data to display on screen
@@ -30,7 +27,6 @@ public class HelloServlet extends HttpServlet {
         userList.add(new User("Sergey", "Brin"));
         userList.add(new User("Larry", "Ellison"));
     }
-
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,7 +46,6 @@ public class HelloServlet extends HttpServlet {
                 userList.add(new User(firstname, lastname));
             }
         }
-
         doGet(request, response);
     }
 }

@@ -21,7 +21,7 @@
 	<div id="message">
 		<p> ${error} </p>
 	</div>
-	<form action="/main_page" method="POST">
+	<form action="/view_main" method="POST">
 		<input type="submit" value="Zurück zur Startseite"/>
 	</form>
 </body>

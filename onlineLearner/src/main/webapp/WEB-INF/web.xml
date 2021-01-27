@@ -64,7 +64,7 @@
 
 	<servlet-mapping>
 		<servlet-name>Hauptseite</servlet-name>
-		<url-pattern>main_page</url-pattern>
+		<url-pattern>view_main</url-pattern> 
 	</servlet-mapping>
 	
 	<servlet>

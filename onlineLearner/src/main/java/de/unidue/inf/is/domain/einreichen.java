@@ -1,12 +1,13 @@
 package de.unidue.inf.is.domain;
 
 public class einreichen {
-    private int bnummer ;
+    private int bnummer;
     private int kid;
     private int anummer;
     private int aid;
-    private String abgabetext ="";
-    public einreichen(){
+    private String abgabetext = "";
+
+    public einreichen() {
 
     }
 
