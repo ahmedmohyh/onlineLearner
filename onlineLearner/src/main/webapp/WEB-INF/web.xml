@@ -150,5 +150,21 @@
 		<servlet-name>DeleteCourse</servlet-name>
 		<url-pattern>/delete_course</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewAssignment</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewAssignmentServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewAssignment</servlet-name>
+		<url-pattern>/new_assignment</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewAssignmentCheck</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewAssignmentCheckServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewAssignmentCheck</servlet-name>
+		<url-pattern>/new_assignment_check</url-pattern>
+	</servlet-mapping>
 
 </web-app>

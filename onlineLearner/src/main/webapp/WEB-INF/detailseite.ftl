@@ -70,9 +70,9 @@
         left: 1150px; " type="submit" value="Startseite" class = "btn btn-primary" style = "margin-bottom:10px" />
 	</div>
 </form>
-<di>
+<div>
 	<hr size="3" width="100%" color="black" >
-</di>
+</div>
 <div>
 	<table class="datatable" >
 		<tr>
@@ -80,7 +80,7 @@
 		</tr>
 		<#list my_auf_list as mylist>
 			<tr style="margin: auto">
-				<td style="font-size: 20px; color: blueviolet"> ${mylist.name}</td>
+				<td style="font-size: 20px; color: blueviolet"><a href="/new_assignment?user=1&kid=${mylist.kid}&anum=${mylist.anummer}"> ${mylist.name} </a> </td>
 				<td style="font-size: 20px; color: blueviolet"> ${mylist.abgabetext} </td>
 			</tr>
 		</#list>

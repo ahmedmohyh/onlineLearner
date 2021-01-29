@@ -25,11 +25,9 @@ public class DeleteCourseServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		int KID = Integer.parseInt(request.getParameter("ks"));
-		System.out.println(KID);
 		KursStore ks = new KursStore();
 		Kurs k = ks.get_kurs(KID);
 		
-		System.out.println(k.getErsteller());
 		if(k.getErsteller() != 1) {
 			ks.close();
 			doGet(request, response);
