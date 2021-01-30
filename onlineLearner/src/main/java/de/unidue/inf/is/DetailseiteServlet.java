@@ -1,6 +1,7 @@
 package de.unidue.inf.is;
 
 import de.unidue.inf.is.domain.Aufgabe;
+import de.unidue.inf.is.domain.Bewertung;
 import de.unidue.inf.is.domain.Kurs;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class DetailseiteServlet extends HttpServlet {
     AufgabeStore as = new AufgabeStore();
     ArrayList<Aufgabe> af = new ArrayList<Aufgabe>();
     ArrayList<Einreichen> ei = new ArrayList<>();
+    ArrayList<Bewertung> bw = new ArrayList<>();
 
     DetailseiteServlet(Kurs kk) {
         k = kk;
@@ -46,13 +48,23 @@ public class DetailseiteServlet extends HttpServlet {
         ei = as.get_abgabe_eineskurses(k);
         System.out.println("i got here 2");
         for (Einreichen ee : ei) {
+          Bewertung b = new Bewertung();
+            b = as.get_Bewertung_einerabgabe(ee.getAid());
+           ee.setBewertung(Integer.toString(b.getNote()));
             int x = ee.getAnummer();
             for (Aufgabe a : af) {
                 if (a.getAnummer() == x) {
                     if (ee.getAbgabetext().equals("")) {
                         a.setAbgabetext("Keine Abgabe");
-                    } else {
+                    }
+                    else {
                         a.setAbgabetext(ee.getAbgabetext());
+                    }
+                    if (ee.getBewertung().equals("") || ee.getBewertung().equals("0")){
+                        a.setBewertung(" Keine Bewertung Vorhanden");
+                    }
+                    else  {
+                        a.setBewertung(ee.getBewertung());
                     }
                 }
             }
@@ -60,6 +72,10 @@ public class DetailseiteServlet extends HttpServlet {
         for (Aufgabe a : af) {
             if (a.getAbgabetext().equals("")) {
                 a.setAbgabetext("Keine Abgabe");
+            }
+            if (a.getBewertung().equals("")){
+                System.out.println("got into bew");
+                a.setBewertung(" Keine Bewertung Vorhanden");
             }
         }
         doGet(request, response);

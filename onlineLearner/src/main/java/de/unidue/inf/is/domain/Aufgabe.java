@@ -6,6 +6,7 @@ public class Aufgabe {
     String name;
     String beschreibung;
     String abgabetext = "";
+    String Bewertung = "";
 
     public Aufgabe() {
     }
@@ -40,6 +41,14 @@ public class Aufgabe {
 
     public int getAnummer() {
         return anummer;
+    }
+
+    public String getBewertung() {
+        return Bewertung;
+    }
+
+    public void setBewertung(String bewertung) {
+        Bewertung = bewertung;
     }
 
     public String getName() {

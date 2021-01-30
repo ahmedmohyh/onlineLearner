@@ -1,6 +1,7 @@
 package de.unidue.inf.is.stores;
 
 import de.unidue.inf.is.domain.Aufgabe;
+import de.unidue.inf.is.domain.Bewertung;
 import de.unidue.inf.is.domain.Einreichen;
 import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.utils.DBUtil;
@@ -66,6 +67,23 @@ public class AufgabeStore implements Closeable {
             throw new StoreException(e);
         }
         return ei;
+    }
+    public Bewertung get_Bewertung_einerabgabe(int aid) {
+        Bewertung bw= new Bewertung();
+        try {
+            PreparedStatement psmt;
+            psmt = connection.prepareStatement("select avg(bw.note) as av_note from dbp155.bewerten bw where bw.bnummer =1 and bw.aid =? group by bw.aid");
+            psmt.setInt(1,aid);
+            ResultSet rs = psmt.executeQuery();
+            while (rs.next()){
+                System.out.println("I got into bewertung");
+               // b.setAid(rs.getInt("aid"));
+                bw.setNote(rs.getInt("av_note"));
+            }
+        }catch (SQLException e){
+            throw new StoreException(e);
+        }
+        return bw;
     }
 
     //Gibt eine spezifische Aufgabe eines Kurses aus

@@ -76,12 +76,13 @@
 <div>
 	<table class="datatable" >
 		<tr>
-			<th style="font-size: 25px; color: brown ;margin: 40px"> Aufgabe </th> <th style="font-size: 25px; color: brown ;margin: 20px; padding:30px"> Meine Abgabe </th>
+			<th style="font-size: 25px; color: brown ;margin: 40px"> Aufgabe </th> <th style="font-size: 25px; color: brown ;margin: 20px; padding:30px"> Meine Abgabe </th> <th style="font-size: 25px; color: brown ;margin: 20px; padding:30px"> Bewrtungsnote </th>
 		</tr>
 		<#list my_auf_list as mylist>
-			<tr style="margin: auto">
-				<td style="font-size: 20px; color: blueviolet"><a href="/new_assignment?user=1&kid=${mylist.kid}&anum=${mylist.anummer}"> ${mylist.name} </a> </td>
-				<td style="font-size: 20px; color: blueviolet"> ${mylist.abgabetext} </td>
+			<tr style="margin: 20px">
+				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"><a href="/new_assignment?user=1&kid=${mylist.kid}&anum=${mylist.anummer}"> ${mylist.name} </a> </td>
+				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"> ${mylist.abgabetext} </td>
+				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"> ${mylist.getBewertung()} </td>
 			</tr>
 		</#list>
 	</table>

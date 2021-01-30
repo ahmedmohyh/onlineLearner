@@ -6,6 +6,15 @@ public class Einreichen {
     private int anummer;
     private int aid;
     private String abgabetext = "";
+    private String Bewertung = "";
+
+    public String getBewertung() {
+        return Bewertung;
+    }
+
+    public void setBewertung(String bewertung) {
+        Bewertung = bewertung;
+    }
 
     public Einreichen() {
 
