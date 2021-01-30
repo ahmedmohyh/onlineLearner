@@ -15,6 +15,8 @@ import java.sql.SQLException;
 public class NewRateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String errorMessage = "";
+    int kid;
+    int aNum;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,6 +26,10 @@ public class NewRateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        kid = Integer.parseInt(request.getParameter("kid"));
+        aNum = Integer.parseInt(request.getParameter("anummer"));
+
+        /*
         int KID = Integer.parseInt(request.getParameter("ks"));
         int aid = Integer.parseInt(request.getParameter("aID"));
         int bnummer = Integer.parseInt(request.getParameter("bnummer"));
@@ -52,5 +58,6 @@ public class NewRateServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        */
     }
 }

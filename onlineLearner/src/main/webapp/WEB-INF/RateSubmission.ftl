@@ -24,13 +24,13 @@
 <body>
 <form action="/assess?user=1" method="POST">
     <div>
-        Aufgabe:
+        Aufgabe: <!-- ${ } -->
     </div>
     <div>
-        Beschreibung:
+        Beschreibung: <!-- ${ } -->
     </div>
     <div>
-        Abgabetext:
+        Abgabetext: <!-- ${ } -->
     </div>
 
     <form>
@@ -48,11 +48,12 @@
         <input type="radio" id="six" name="note" value="6">
         <label for="six"> 6</label>
     </form>
-
-    <div id="description">
-        Kommentar
-        <textarea id="description_field" name="comment" rows="10" cols="50" ></textarea>
-    </div>
+    <form>
+        <div>
+            Kommentar
+            <textarea id="comment" name="comment" rows="10" cols="50"></textarea>
+        </div>
+    </form>
     <form name="ZurückZuStart" action="/assess_check" method="post">
         <div>
             <input style="margin-right: 300px;   float: right;
