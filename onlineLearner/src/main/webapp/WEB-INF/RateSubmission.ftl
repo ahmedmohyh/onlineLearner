@@ -24,13 +24,13 @@
 <body>
 <form action="/assess?user=1" method="POST">
     <div>
-        Aufgabe: ${aufName}
+        Aufgabe:
     </div>
     <div>
-        Beschreibung: ${aufText}
+        Beschreibung:
     </div>
     <div>
-        Abgabetext: ${abText}
+        Abgabetext:
     </div>
 
     <form>
@@ -53,7 +53,7 @@
         Kommentar
         <textarea id="description_field" name="comment" rows="10" cols="50" ></textarea>
     </div>
-    <form name="ZurückZuStart" action="/assess_check" method="get">
+    <form name="ZurückZuStart" action="/assess_check" method="post">
         <div>
             <input style="margin-right: 300px;   float: right;
         color: white;
