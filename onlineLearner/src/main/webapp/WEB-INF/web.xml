@@ -166,5 +166,20 @@
 		<servlet-name>NewAssignmentCheck</servlet-name>
 		<url-pattern>/new_assignment_check</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>RateSubmissionServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.RateSubmissionServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RateSubmissionServlet</servlet-name>
+		<url-pattern>assess</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>NewRateServlet</servlet-name>
+		<servlet-class>de.unidue.inf.is.NewRateServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewRateServlet</servlet-name>
+		<url-pattern>assess_check</url-pattern>
+	</servlet-mapping>
 </web-app>

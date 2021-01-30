@@ -6,7 +6,7 @@ import de.unidue.inf.is.domain.Kurs;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.unidue.inf.is.domain.einreichen;
+import de.unidue.inf.is.domain.Einreichen;
 import de.unidue.inf.is.stores.AufgabeStore;
 import de.unidue.inf.is.stores.KursStore;
 
@@ -22,7 +22,7 @@ public class DetailseiteServlet extends HttpServlet {
     KursStore ks = new KursStore();
     AufgabeStore as = new AufgabeStore();
     ArrayList<Aufgabe> af = new ArrayList<Aufgabe>();
-    ArrayList<einreichen> ei = new ArrayList<>();
+    ArrayList<Einreichen> ei = new ArrayList<>();
 
     DetailseiteServlet(Kurs kk) {
         k = kk;
@@ -45,7 +45,7 @@ public class DetailseiteServlet extends HttpServlet {
         System.out.println("i got here 1");
         ei = as.get_abgabe_eineskurses(k);
         System.out.println("i got here 2");
-        for (einreichen ee : ei) {
+        for (Einreichen ee : ei) {
             int x = ee.getAnummer();
             for (Aufgabe a : af) {
                 if (a.getAnummer() == x) {

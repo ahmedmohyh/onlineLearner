@@ -1,8 +1,8 @@
 package de.unidue.inf.is.stores;
 
 import de.unidue.inf.is.domain.Aufgabe;
+import de.unidue.inf.is.domain.Einreichen;
 import de.unidue.inf.is.domain.Kurs;
-import de.unidue.inf.is.domain.einreichen;
 import de.unidue.inf.is.utils.DBUtil;
 
 import java.io.Closeable;
@@ -11,10 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class AufgabeStore implements Closeable {
     private Connection connection;
@@ -50,15 +47,15 @@ public class AufgabeStore implements Closeable {
     }
 
     //Diese Methode "bringt" die Abgaben die der Benutzer abgegeben hat
-    public ArrayList<einreichen> get_abgabe_eineskurses(Kurs k) throws StoreException {
-        ArrayList<einreichen> ei = new ArrayList<>();
-
+    public ArrayList<Einreichen> get_abgabe_eineskurses(Kurs k) throws StoreException {
+        ArrayList<Einreichen> ei = new ArrayList<>();
         try {
-            PreparedStatement psmt = connection.prepareStatement("select  k.anummer , ab.abgabetext , ab.aid from dbp155.einreichen k join dbp155.abgabe ab on k.aid = ab.aid where k.kid = ? and k.bnummer =1");
+            PreparedStatement psmt;
+            psmt = connection.prepareStatement("select  k.anummer , ab.abgabetext , ab.aid from dbp155.einreichen k join dbp155.abgabe ab on k.aid = ab.aid where k.kid = ? and k.bnummer =1");
             psmt.setInt(1, k.getKid());
             ResultSet rs = psmt.executeQuery();
             while (rs.next()) {
-                einreichen e = new einreichen();
+                Einreichen e = new Einreichen();
                 e.setAbgabetext(rs.getString("abgabetext"));
                 e.setAnummer(rs.getInt("anummer"));
                 e.setKid(k.getKid());
@@ -91,6 +88,21 @@ public class AufgabeStore implements Closeable {
     	}
     	return res;
     }
+
+    public void createNewRate(int bnummer, int aid, int note, String kommentar) throws StoreException {
+        try {
+            PreparedStatement pstmt;
+            pstmt = connection.prepareStatement("INSERT INTO dbp155.bewerten (bnummer, aid, note, kommentar) values (?, ?, ?, ?)");
+            pstmt.setInt(1, bnummer);
+            pstmt.setInt(2, aid);
+            pstmt.setInt(3, note);
+            pstmt.setString(4, kommentar);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new StoreException(e);
+        }
+    }
+
     
     public boolean checkAssignment(int bnummer, int kid, int anummer) throws StoreException
     {
