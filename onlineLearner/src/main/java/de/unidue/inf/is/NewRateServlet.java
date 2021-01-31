@@ -15,8 +15,6 @@ import java.sql.SQLException;
 public class NewRateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String errorMessage = "";
-    int kid;
-    int aNum;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,11 +24,10 @@ public class NewRateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        kid = Integer.parseInt(request.getParameter("kid"));
-        aNum = Integer.parseInt(request.getParameter("anummer"));
+        int KID = Integer.parseInt(request.getParameter("kid"));
+        int aNum = Integer.parseInt(request.getParameter("anummer"));
 
         /*
-        int KID = Integer.parseInt(request.getParameter("ks"));
         int aid = Integer.parseInt(request.getParameter("aID"));
         int bnummer = Integer.parseInt(request.getParameter("bnummer"));
         int note = Integer.parseInt(request.getParameter("note"));
@@ -42,8 +39,8 @@ public class NewRateServlet extends HttpServlet {
         try {
             if (!ks.ist_eingeschrieben(KID)) {
                 errorMessage = "Du bist nicht im Kurs eingeschrieben!";
-                as.close();
-                doGet(request, response);
+                as.close(); */
+                doGet(request, response); /*
             } else if (k.getErsteller() == 1) {
                 errorMessage = "Du kannst nicht deine eigene Abgabe bewerten!";
                 as.close();
