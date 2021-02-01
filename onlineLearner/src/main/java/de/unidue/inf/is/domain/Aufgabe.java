@@ -1,12 +1,40 @@
 package de.unidue.inf.is.domain;
 
 public class Aufgabe {
+    private int bnummer;
     private int kid;
     private int anummer;
-    String name;
-    String beschreibung;
+    private int AID;
+
+    public int getBnummer() {
+        return bnummer;
+    }
+
+    public void setBnummer(int bnummer) {
+        this.bnummer = bnummer;
+    }
+
+    String name="";
+    String beschreibung="";
     String abgabetext = "";
     String Bewertung = "";
+    boolean von1_bewertet = false;
+
+    public int getAID() {
+        return AID;
+    }
+
+    public void setAID(int AID) {
+        this.AID = AID;
+    }
+
+    public boolean isVon1_bewertet() {
+        return von1_bewertet;
+    }
+
+    public void setVon1_bewertet(boolean von1_bewertet) {
+        this.von1_bewertet = von1_bewertet;
+    }
 
     public Aufgabe() {
     }

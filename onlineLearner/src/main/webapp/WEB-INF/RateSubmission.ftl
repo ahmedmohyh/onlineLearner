@@ -22,39 +22,39 @@
 </style>
 
 <body>
-<form action="/assess?user=1" method="POST">
-    <div>
-        Aufgabe: <!-- ${ } -->
+
+    <div style="margin: 10px; color: darkred" >
+        Aufgabe: ${Sub.getName()}
     </div>
-    <div>
-        Beschreibung: <!-- ${ } -->
+    <div  style="margin: 10px; color: darkred">
+        Beschreibung:  ${Sub.getBeschreibung()}
     </div>
-    <div>
-        Abgabetext: <!-- ${ } -->
+    <div  style="margin: 10px; color: darkred">
+        Abgabetext:  ${Sub.getAbgabetext()}
+    </div>
+    <form name="ZurückZuStart" action="/assess_check?user=${Sub.getBnummer()}&aid=${Sub.getAID()}" method="post">
+    <div id = "rates">
+        Bewertungsnote:
+        <input type="radio" id="one" name="one" value="1">
+        <label for="one"> 1</label>
+        <input type="radio" id="two" name="two" value="2">
+        <label for="two"> 2</label>
+        <input type="radio" id="three" name="three" value="3">
+        <label for="three"> 3</label>
+        <input type="radio" id="four" name="four" value="4">
+        <label for="four"> 4</label>
+        <input type="radio" id="five" name="five" value="5">
+        <label for="five"> 5</label>
+        <input type="radio" id="six" name="six" value="6">
+        <label for="six"> 6</label>
     </div>
 
-    <form>
-        Bewertungsnote:
-        <input type="radio" id="one" name="note" value="1">
-        <label for="one"> 1</label>
-        <input type="radio" id="two" name="note" value="2">
-        <label for="two"> 2</label>
-        <input type="radio" id="three" name="note" value="3">
-        <label for="three"> 3</label>
-        <input type="radio" id="four" name="note" value="4">
-        <label for="four"> 4</label>
-        <input type="radio" id="five" name="note" value="5">
-        <label for="five"> 5</label>
-        <input type="radio" id="six" name="note" value="6">
-        <label for="six"> 6</label>
-    </form>
-    <form>
-        <div>
+    <div>
             Kommentar
             <textarea id="comment" name="comment" rows="10" cols="50"></textarea>
-        </div>
-    </form>
-    <form name="ZurückZuStart" action="/assess_check" method="post">
+    </div>
+
+
         <div>
             <input style="margin-right: 300px;   float: right;
         color: white;
@@ -64,7 +64,7 @@
         " type="submit" value="Bewerten" class="btn btn-primary" style="margin-bottom:10px"/>
         </div>
     </form>
-</form>
+
 </body>
 
 

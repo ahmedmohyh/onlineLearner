@@ -15,6 +15,7 @@ import java.sql.SQLException;
 public class NewRateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String errorMessage = "";
+    AufgabeStore afs = new AufgabeStore();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -24,37 +25,36 @@ public class NewRateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int KID = Integer.parseInt(request.getParameter("kid"));
-        int aNum = Integer.parseInt(request.getParameter("anummer"));
-
-        /*
-        int aid = Integer.parseInt(request.getParameter("aID"));
-        int bnummer = Integer.parseInt(request.getParameter("bnummer"));
-        int note = Integer.parseInt(request.getParameter("note"));
-        String comment = request.getParameter("comment");
-        KursStore ks = new KursStore();
-        AufgabeStore as = new AufgabeStore();
-        Kurs k = ks.get_kurs(KID);
-
-        try {
-            if (!ks.ist_eingeschrieben(KID)) {
-                errorMessage = "Du bist nicht im Kurs eingeschrieben!";
-                as.close(); */
-                doGet(request, response); /*
-            } else if (k.getErsteller() == 1) {
-                errorMessage = "Du kannst nicht deine eigene Abgabe bewerten!";
-                as.close();
-                doGet(request, response);
-            } else {
-                as.createNewRate(aid, bnummer, note, comment);
-                as.complete();
-                as.close();
-                HauptseiteServlet main = new HauptseiteServlet();
-                main.doGet(request, response);
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        int AID = Integer.parseInt(request.getParameter("aid"));
+        int bnummer = Integer.parseInt(request.getParameter("user"));
+        int note = 0;
+        String rates = request.getParameter("rate");
+            if ("1".equals(request.getParameter("one"))) {
+            note = 1;
         }
-        */
+        else if ("2".equals(request.getParameter("two"))) {
+            note = 2;
+        }
+        else if ("3".equals(request.getParameter("three"))) {
+            note = 3;
+        }
+        else if ("4".equals(request.getParameter("four"))) {
+            note = 4;
+        }
+       else if ("5".equals(request.getParameter("five"))) {
+            note = 5;
+        }
+        else if ("6".equals(request.getParameter("six"))) {
+            note = 6;
+        }
+      String ss= "";
+           ss = request.getParameter("comment");
+            System.out.println(note);
+            System.out.println(ss);
+       afs.createNewRate(bnummer, AID , note , ss);
+        errorMessage = "You added The Rate Successfully";
+        doGet(request, response);
     }
+
 }
+

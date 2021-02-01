@@ -1,5 +1,6 @@
 package de.unidue.inf.is.stores;
 
+import com.ibm.db2.jcc.uw.r;
 import de.unidue.inf.is.domain.Aufgabe;
 import de.unidue.inf.is.domain.Bewertung;
 import de.unidue.inf.is.domain.Einreichen;
@@ -8,6 +9,8 @@ import de.unidue.inf.is.utils.DBUtil;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.io.PushbackInputStream;
+import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,6 +48,23 @@ public class AufgabeStore implements Closeable {
             throw new StoreException(e);
         }
         return Af;
+    }
+    public Einreichen get_random_einreichen(int KID ){
+        Einreichen ei = new Einreichen();
+        try{
+            PreparedStatement psmt = connection.prepareStatement("select ei.bnummer, ei.anummer, ei.aid, RAND() as IDX from dbp155.einreichen ei where ei.bnummer != 1 and ei.kid = ? order by IDX FETCH FIRST 1 ROWS only");
+            psmt.setInt(1,KID);
+            ResultSet rs = psmt.executeQuery();
+            while (rs.next()){
+                ei.setAid(rs.getInt("aid"));
+                ei.setAnummer(rs.getInt("anummer"));
+                ei.setBnummer(rs.getInt("bnummer"));
+            }
+
+        }catch (SQLException e){
+            new StoreException(e);
+        }
+        return  ei;
     }
 
     //Diese Methode "bringt" die Abgaben die der Benutzer abgegeben hat
@@ -97,9 +117,9 @@ public class AufgabeStore implements Closeable {
     		ResultSet rs = pstmt.executeQuery();
     		while(rs.next()) {
     			res.setKid(kid);
-    			res.setAnummer(aNum);
-    			res.setName(rs.getString("name"));
-    			res.setBeschreibung(rs.getString("beschreibung"));
+                res.setAnummer(aNum);
+                res.setName(rs.getString("name"));
+                res.setBeschreibung(rs.getString("beschreibung"));
     		}
     	} catch(SQLException e) {
     		throw new StoreException(e);
@@ -109,16 +129,37 @@ public class AufgabeStore implements Closeable {
 
     public void createNewRate(int bnummer, int aid, int note, String kommentar) throws StoreException {
         try {
+            System.out.println("Iam inside createNewRate");
+            System.out.println(bnummer);
+            System.out.println(aid);
+            System.out.println(note);
+            System.out.println(kommentar);
             PreparedStatement pstmt;
             pstmt = connection.prepareStatement("INSERT INTO dbp155.bewerten (bnummer, aid, note, kommentar) values (?, ?, ?, ?)");
             pstmt.setInt(1, bnummer);
             pstmt.setInt(2, aid);
             pstmt.setInt(3, note);
             pstmt.setString(4, kommentar);
+            System.out.println("i was there");
             pstmt.executeUpdate();
         } catch (SQLException e) {
             throw new StoreException(e);
         }
+    }
+    public String get_abgabe_text (int AID) {
+        String s ="";
+        try {
+            PreparedStatement psmt = connection.prepareStatement("select a.abgabetext  from dbp155.abgabe a where a.aid = ? ");
+            psmt.setInt(1,AID);
+            ResultSet rs = psmt.executeQuery();
+            while (rs.next()){
+                    s = rs.getString("abgabetext");
+            }
+        }catch (SQLException e){
+            throw new StoreException(e);
+        }
+
+        return s;
     }
 
     
