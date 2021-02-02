@@ -1,6 +1,5 @@
 package de.unidue.inf.is.stores;
 
-import com.ibm.db2.jcc.uw.r;
 import de.unidue.inf.is.domain.Aufgabe;
 import de.unidue.inf.is.domain.Bewertung;
 import de.unidue.inf.is.domain.Einreichen;
@@ -9,8 +8,6 @@ import de.unidue.inf.is.utils.DBUtil;
 
 import java.io.Closeable;
 import java.io.IOException;
-import java.io.PushbackInputStream;
-import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,7 +46,9 @@ public class AufgabeStore implements Closeable {
         }
         return Af;
     }
-    public Einreichen get_random_einreichen(int KID ){
+    
+    
+    public Einreichen get_random_einreichen(int KID ) throws StoreException{
         Einreichen ei = new Einreichen();
         try{
             PreparedStatement psmt = connection.prepareStatement("select ei.bnummer, ei.anummer, ei.aid, RAND() as IDX from dbp155.einreichen ei where ei.bnummer != 1 and ei.kid = ? order by IDX FETCH FIRST 1 ROWS only");
@@ -62,7 +61,7 @@ public class AufgabeStore implements Closeable {
             }
 
         }catch (SQLException e){
-            new StoreException(e);
+            throw new StoreException(e);
         }
         return  ei;
     }
@@ -88,7 +87,8 @@ public class AufgabeStore implements Closeable {
         }
         return ei;
     }
-    public Bewertung get_Bewertung_einerabgabe(int aid) {
+    
+    public Bewertung get_Bewertung_einerabgabe(int aid) throws StoreException{
         Bewertung bw= new Bewertung();
         try {
             PreparedStatement psmt;
@@ -146,7 +146,8 @@ public class AufgabeStore implements Closeable {
             throw new StoreException(e);
         }
     }
-    public String get_abgabe_text (int AID) {
+    
+    public String get_abgabe_text (int AID) throws StoreException {
         String s ="";
         try {
             PreparedStatement psmt = connection.prepareStatement("select a.abgabetext  from dbp155.abgabe a where a.aid = ? ");
@@ -161,7 +162,6 @@ public class AufgabeStore implements Closeable {
 
         return s;
     }
-
     
     public boolean checkAssignment(int bnummer, int kid, int anummer) throws StoreException
     {

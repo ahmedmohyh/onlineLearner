@@ -61,7 +61,7 @@ public final class KursStore implements Closeable {
         }
     }
 
-    public void sich_einschreiben(Kurs k) throws StoreException, SQLException {
+    public void sich_einschreiben(Kurs k) throws StoreException {
         String s = Integer.toString(k.getKid());
         try {
             connection.setAutoCommit(false);
@@ -72,13 +72,9 @@ public final class KursStore implements Closeable {
             pstmt = connection.prepareStatement("update dbp155.kurs k Set k.freiePlaetze = k.freiePlaetze-1 where k.kid = ?");
             pstmt.setString(1, s);
             pstmt.executeUpdate();
-            //connection.commit();
         } catch (SQLException e) {
-            //connection.rollback();
             throw new StoreException(e);
-        } /*finally {
-            connection.setAutoCommit(true);
-        }*/
+        }
     }
 
     public ArrayList<Kurs> get_my_courses() throws StoreException {
@@ -101,7 +97,7 @@ public final class KursStore implements Closeable {
         return result;
     }
 
-    public boolean ist_eingeschrieben(int kid) throws StoreException, SQLException {
+    public boolean ist_eingeschrieben(int kid) throws StoreException {
         boolean des = false;
         List<Integer> int_list = new ArrayList<Integer>();
         String s = Integer.toString(kid);

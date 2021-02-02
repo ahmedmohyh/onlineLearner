@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import de.unidue.inf.is.domain.Einreichen;
 import de.unidue.inf.is.stores.AufgabeStore;
-import de.unidue.inf.is.stores.KursStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class DetailseiteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     Kurs k = new Kurs();
-    KursStore ks = new KursStore();
-    AufgabeStore as = new AufgabeStore();
+    AufgabeStore as;
     ArrayList<Aufgabe> af = new ArrayList<Aufgabe>();
     ArrayList<Einreichen> ei = new ArrayList<>();
     ArrayList<Bewertung> bw = new ArrayList<>();
@@ -43,7 +41,8 @@ public class DetailseiteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        af = as.get_A_einesKurses(k);
+        as = new AufgabeStore();
+    	af = as.get_A_einesKurses(k);
         System.out.println("i got here 1");
         ei = as.get_abgabe_eineskurses(k);
         System.out.println("i got here 2");
@@ -78,6 +77,8 @@ public class DetailseiteServlet extends HttpServlet {
                 a.setBewertung(" Keine Bewertung Vorhanden");
             }
         }
+        as.complete();
+        as.close();
         doGet(request, response);
     }
 }

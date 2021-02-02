@@ -1,7 +1,6 @@
 package de.unidue.inf.is;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.KursStore;
@@ -12,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class ViewCourseServlet extends HttpServlet {
-    KursStore ks = new KursStore();
+    KursStore ks;
     Kurs k = new Kurs();
     private static final long serialVersionUID = 1L;
 
@@ -25,22 +24,22 @@ public class ViewCourseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int KID = Integer.parseInt(request.getParameter("ks"));
-
-        try {
-            if (!ks.ist_eingeschrieben(KID)) {
-                System.out.println("nicht eingeschrieben");
-                k = ks.get_kurs(KID);
-                System.out.println(k.getName());
-                doGet(request, response);
-            } else {
-                System.out.println("eingeschrieben");
-                k = ks.get_kurs(KID);
-                System.out.println(k.getName());
-                DetailseiteServlet kd = new DetailseiteServlet(k);
-                kd.doPost(request, response);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ks = new KursStore();
+        if (!ks.ist_eingeschrieben(KID)) {
+            System.out.println("nicht eingeschrieben");
+            k = ks.get_kurs(KID);
+            System.out.println(k.getName());
+            ks.complete();
+            ks.close();
+            doGet(request, response);
+        } else {
+            System.out.println("eingeschrieben");
+            k = ks.get_kurs(KID);
+            System.out.println(k.getName());
+            ks.complete();
+            ks.close();
+            DetailseiteServlet kd = new DetailseiteServlet(k);
+            kd.doPost(request, response);
         }
     }
 

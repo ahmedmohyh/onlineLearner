@@ -41,10 +41,9 @@ public class NewAssignmentCheckServlet extends HttpServlet {
 			dserv.doPost(request, response);
 		}
 		else {
+			as.close();
 			doGet(request, response);
 		}
-		as.complete();
-		as.close();
 	}
 
 }

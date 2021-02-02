@@ -1,21 +1,18 @@
 package de.unidue.inf.is;
 
-import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.AufgabeStore;
-import de.unidue.inf.is.stores.KursStore;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 //Überprüfung
 public class NewRateServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static String errorMessage = "";
-    AufgabeStore afs = new AufgabeStore();
+    AufgabeStore as;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -29,7 +26,7 @@ public class NewRateServlet extends HttpServlet {
         int bnummer = Integer.parseInt(request.getParameter("user"));
         int note = 0;
         String rates = request.getParameter("rate");
-            if ("1".equals(request.getParameter("one"))) {
+        if ("1".equals(request.getParameter("one"))) {
             note = 1;
         }
         else if ("2".equals(request.getParameter("two"))) {
@@ -47,12 +44,16 @@ public class NewRateServlet extends HttpServlet {
         else if ("6".equals(request.getParameter("six"))) {
             note = 6;
         }
-      String ss= "";
-           ss = request.getParameter("comment");
-            System.out.println(note);
-            System.out.println(ss);
-       afs.createNewRate(bnummer, AID , note , ss);
+        String ss= "";
+        ss = request.getParameter("comment");
+        System.out.println(note);
+        System.out.println(ss);
+       
+        as = new AufgabeStore();
+        as.createNewRate(bnummer, AID , note , ss);
         errorMessage = "You added The Rate Successfully";
+        as.complete();
+        as.close();
         doGet(request, response);
     }
 

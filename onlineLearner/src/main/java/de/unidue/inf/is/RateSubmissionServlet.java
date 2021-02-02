@@ -14,18 +14,22 @@ import java.io.IOException;
 public class RateSubmissionServlet extends HttpServlet {
 	Einreichen ei = new Einreichen();
 	Aufgabe af = new Aufgabe();
-AufgabeStore afs = new AufgabeStore();
+	AufgabeStore as;
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int KID = Integer.parseInt(request.getParameter("kid"));
-		ei = afs.get_random_einreichen(KID);
+		as = new AufgabeStore();
+		ei = as.get_random_einreichen(KID);
 		af.setKid(KID);
 		Aufgabe temp = new Aufgabe();
-		temp = afs.getAufgabe(KID , ei.getAnummer());
+		temp = as.getAufgabe(KID , ei.getAnummer());
 		String s = "";
-		s=afs.get_abgabe_text(ei.getAid());
+		s=as.get_abgabe_text(ei.getAid());
+		as.complete();
+		as.close();
+		
 		af.setBeschreibung(temp.getBeschreibung());
 		af.setName(temp.getName());
 		af.setAbgabetext(s);
