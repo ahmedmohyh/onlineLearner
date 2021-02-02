@@ -57,6 +57,21 @@
         left: 1150px; " type="submit" value="Kurs Löschen" class = "btn btn-primary" style = "margin-bottom:10px" />
 	</div>
 </form>
+
+<form name="Bewerten" action="/assess?user=1&kid=${my_k.kid}" method="post">
+	<div>
+	<input style="margin-right: 300px;   float: right;
+        color: white;
+        background-color: BLUE;
+        size: 50px;
+        font-size:25px;
+        height: 51px;
+        width : 250px;
+        top :200px;
+        left: 1150px; " type="submit" value="Bewerten" class = "btn btn-primary" style = "margin-bottom:10px" />
+	</div>
+</form>
+	
 <form name="ZurückZuStart" action="/view_main" method="get">
 	<div>
 		<input style="margin-right: 300px;   float: right;
@@ -83,7 +98,6 @@
 				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"><a href="/new_assignment?user=1&kid=${mylist.kid}&anum=${mylist.anummer}"> ${mylist.name} </a> </td>
 				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"> ${mylist.abgabetext} </td>
 				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"> ${mylist.getBewertung()} </td>
-				<td style="font-size: 20px; color: blueviolet; margin: 10px; padding: 20px"><a href="/assess?user=1&kid=${mylist.kid}&anum=${mylist.anummer}"> bewerten </a> </td>
 			</tr>
 		</#list>
 	</table>

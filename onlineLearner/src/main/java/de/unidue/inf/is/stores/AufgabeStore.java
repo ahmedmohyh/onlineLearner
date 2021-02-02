@@ -51,7 +51,7 @@ public class AufgabeStore implements Closeable {
     public Einreichen get_random_einreichen(int KID ) throws StoreException{
         Einreichen ei = new Einreichen();
         try{
-            PreparedStatement psmt = connection.prepareStatement("select ei.bnummer, ei.anummer, ei.aid, RAND() as IDX from dbp155.einreichen ei where ei.bnummer != 1 and ei.kid = ? order by IDX FETCH FIRST 1 ROWS only");
+            PreparedStatement psmt = connection.prepareStatement("select ei.bnummer, ei.anummer, ei.aid, RAND() as idx from dbp155.einreichen ei where ei.bnummer != 1 and ei.kid = ? and ei.aid not in (select b.aid from dbp155.bewerten b where b.bnummer=1) order by idx FETCH FIRST 1 ROWS only");
             psmt.setInt(1,KID);
             ResultSet rs = psmt.executeQuery();
             while (rs.next()){

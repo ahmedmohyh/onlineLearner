@@ -32,22 +32,20 @@
     <div  style="margin: 10px; color: darkred">
         Abgabetext:  ${Sub.getAbgabetext()}
     </div>
-    <form name="ZurückZuStart" action="/assess_check?user=${Sub.getBnummer()}&aid=${Sub.getAID()}" method="post">
-    <div id = "rates">
+    <form name="Bewertung" action="/assess_check?user=1&aid=${Sub.getAID()}" method="post">
+    <fieldset id = "rates">
         Bewertungsnote:
-        <input type="radio" id="one" name="one" value="1">
-        <label for="one"> 1</label>
-        <input type="radio" id="two" name="two" value="2">
-        <label for="two"> 2</label>
-        <input type="radio" id="three" name="three" value="3">
-        <label for="three"> 3</label>
-        <input type="radio" id="four" name="four" value="4">
-        <label for="four"> 4</label>
-        <input type="radio" id="five" name="five" value="5">
-        <label for="five"> 5</label>
-        <input type="radio" id="six" name="six" value="6">
-        <label for="six"> 6</label>
-    </div>
+        <input type="radio" name="rates" value="1">
+        1
+        <input type="radio" name="rates" value="2">
+        2
+        <input type="radio" name="rates" value="3">
+        3
+        <input type="radio" name="rates" value="4">
+        4
+        <input type="radio" name="rates" value="5">
+        5
+    </fieldset>
 
     <div>
             Kommentar

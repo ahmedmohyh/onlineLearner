@@ -19,22 +19,6 @@ public class RateSubmissionServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int KID = Integer.parseInt(request.getParameter("kid"));
-		as = new AufgabeStore();
-		ei = as.get_random_einreichen(KID);
-		af.setKid(KID);
-		Aufgabe temp = new Aufgabe();
-		temp = as.getAufgabe(KID , ei.getAnummer());
-		String s = "";
-		s=as.get_abgabe_text(ei.getAid());
-		as.complete();
-		as.close();
-		
-		af.setBeschreibung(temp.getBeschreibung());
-		af.setName(temp.getName());
-		af.setAbgabetext(s);
-		af.setAID(ei.getAid());
-		af.setBnummer(ei.getBnummer());
 		if (af.getName().equals("")){
 			String msg = "There are no Assignments to be rated in this course";
 			request.setAttribute("error", msg);
@@ -42,15 +26,23 @@ public class RateSubmissionServlet extends HttpServlet {
 		}
 		else {
 			request.setAttribute("Sub", af);
-			//System.out.println("I was in do get");
 			request.getRequestDispatcher("/RateSubmission.ftl").forward(request, response);
 		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//	System.out.println("I was in do post");
-		doGet(request, response);
+		int KID = Integer.parseInt(request.getParameter("kid"));
+		as = new AufgabeStore();
+		ei = as.get_random_einreichen(KID);
+		String s = "";
+		s=as.get_abgabe_text(ei.getAid());
+		
+		af = as.getAufgabe(KID, ei.getAnummer());
+		af.setAbgabetext(s);
+		as.complete();
+		as.close();
+		doGet(request, response);		
 	}
 
 }
