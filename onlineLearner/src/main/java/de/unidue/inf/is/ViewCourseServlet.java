@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.KursStore;
+import jdk.internal.vm.compiler.collections.EconomicMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,21 +26,25 @@ public class ViewCourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int KID = Integer.parseInt(request.getParameter("ks"));
         ks = new KursStore();
-        if (!ks.ist_eingeschrieben(KID)) {
-            System.out.println("nicht eingeschrieben");
-            k = ks.get_kurs(KID);
-            System.out.println(k.getName());
-            ks.complete();
-            ks.close();
-            doGet(request, response);
-        } else {
-            System.out.println("eingeschrieben");
-            k = ks.get_kurs(KID);
-            System.out.println(k.getName());
-            ks.complete();
-            ks.close();
-            DetailseiteServlet kd = new DetailseiteServlet(k);
-            kd.doPost(request, response);
+        try {
+            if (!ks.ist_eingeschrieben(KID)) {
+                System.out.println("nicht eingeschrieben");
+                k = ks.get_kurs(KID);
+                System.out.println(k.getName());
+                ks.complete();
+                ks.close();
+                doGet(request, response);
+            } else {
+                System.out.println("eingeschrieben");
+                k = ks.get_kurs(KID);
+                System.out.println(k.getName());
+                ks.complete();
+                ks.close();
+                DetailseiteServlet kd = new DetailseiteServlet(k);
+                kd.doPost(request, response);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

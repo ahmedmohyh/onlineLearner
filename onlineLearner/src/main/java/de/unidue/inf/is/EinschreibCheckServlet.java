@@ -30,36 +30,42 @@ public class EinschreibCheckServlet extends HttpServlet {
 		int KID = Integer.parseInt(request.getParameter("ks"));
 		ks = new KursStore();
 		k = ks.get_kurs(KID);
-		
-		if (ks.ist_eingeschrieben(KID)) {
-			msg = "You are already registered for this course";
-		} else if (k.getFreiePlaetze()<=0){
-			msg ="All places are already taken try next semester!";
-		} else if (k.getSchluessel()!=null){
-			String kKey;
-			kKey = request.getParameter("key");
+		try {
+			if (ks.ist_eingeschrieben(KID)) {
+				msg = "You are already registered for this course";
+			} else if (k.getFreiePlaetze() <= 0) {
+				msg = "All places are already taken try next semester!";
+			} else if (k.getSchluessel() != null) {
+				String kKey;
+				kKey = request.getParameter("key");
 
-			if (request.getParameter("key").equals("")){
-				msg = "You have to enter a key";
-			} else if (!k.getSchluessel().equals(kKey)){
+				if (request.getParameter("key").equals("")) {
+					msg = "You have to enter a key";
+				} else if (!k.getSchluessel().equals(kKey)) {
 					msg = "Incorrect key";
+				} else {
+					msg = "You are now registered";
+				}
 			} else {
-					msg= "You are now registered";
+				msg = "You are now registered";
 			}
-		} else {
-			msg= "You are now registered";
-		}
 
-		if (msg.equals("You are now registered")){			
-			ks.sich_einschreiben(k);
-			ks.complete();
-			ks.close();
-			DetailseiteServlet kd = new DetailseiteServlet(k);
-	        kd.doPost(request, response);			
-		}
-		else {
-			ks.close();
-			doGet(request, response);
+			if (msg.equals("You are now registered")) {
+				try {
+					ks.sich_einschreiben(k);
+					ks.complete();
+					ks.close();
+					DetailseiteServlet kd = new DetailseiteServlet(k);
+					kd.doPost(request, response);
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+			} else {
+				ks.close();
+				doGet(request, response);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 }

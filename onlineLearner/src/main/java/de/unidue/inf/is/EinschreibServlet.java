@@ -28,13 +28,19 @@ public class EinschreibServlet extends HttpServlet {
         k = ks.get_kurs(KID);
         System.out.println(k.getSchluessel());
         if(k.getSchluessel() == null) {
-        	//Schreibe direkt ein
-            ks.sich_einschreiben(k);
-            ks.complete();
-            ks.close();
-            DetailseiteServlet kd = new DetailseiteServlet(k);
-            kd.doPost(request, response);
-         }
+            //Schreibe direkt ein
+            try {
+
+
+                ks.sich_einschreiben(k);
+                ks.complete();
+                ks.close();
+                DetailseiteServlet kd = new DetailseiteServlet(k);
+                kd.doPost(request, response);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
          else {
             ks.close();
             doGet(request, response);
