@@ -35,11 +35,13 @@ public class RateSubmissionServlet extends HttpServlet {
 		int KID = Integer.parseInt(request.getParameter("kid"));
 		as = new AufgabeStore();
 		ei = as.get_random_einreichen(KID);
+		System.out.println("get_random_einreichen result: " + ei.getAid());
 		String s = "";
 		s=as.get_abgabe_text(ei.getAid());
 		
 		af = as.getAufgabe(KID, ei.getAnummer());
 		af.setAbgabetext(s);
+		af.setAID(ei.getAid());
 		as.complete();
 		as.close();
 		doGet(request, response);		

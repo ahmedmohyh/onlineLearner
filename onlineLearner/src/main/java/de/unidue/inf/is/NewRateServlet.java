@@ -25,7 +25,7 @@ public class NewRateServlet extends HttpServlet {
         int AID = Integer.parseInt(request.getParameter("aid"));
         int bnummer = Integer.parseInt(request.getParameter("user"));
         int rate = Integer.parseInt(request.getParameter("rates"));
-        
+        System.out.println("AID in doPost of NewRateServlet: " + AID);
         String comment= "";
         comment = request.getParameter("comment");
         System.out.println(rate);
