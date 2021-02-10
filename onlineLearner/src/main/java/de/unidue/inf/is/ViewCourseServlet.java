@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import de.unidue.inf.is.domain.Kurs;
 import de.unidue.inf.is.stores.KursStore;
-import jdk.internal.vm.compiler.collections.EconomicMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

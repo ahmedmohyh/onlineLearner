@@ -28,10 +28,7 @@ public class EinschreibServlet extends HttpServlet {
         k = ks.get_kurs(KID);
         System.out.println(k.getSchluessel());
         if(k.getSchluessel() == null) {
-            //Schreibe direkt ein
             try {
-
-
                 ks.sich_einschreiben(k);
                 ks.complete();
                 ks.close();

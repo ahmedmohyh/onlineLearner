@@ -45,5 +45,4 @@ public class NewAssignmentCheckServlet extends HttpServlet {
 			doGet(request, response);
 		}
 	}
-
 }

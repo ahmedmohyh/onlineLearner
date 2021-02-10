@@ -27,7 +27,7 @@ public class AufgabeStore implements Closeable {
         }
     }
 
-    //Diese Methode "bringt" eine Aufgabe in den Kurs anhand eines Kurses k
+    
     public ArrayList<Aufgabe> get_A_einesKurses(Kurs k) throws StoreException {
         ArrayList<Aufgabe> Af = new ArrayList<Aufgabe>();
         try {
@@ -66,7 +66,7 @@ public class AufgabeStore implements Closeable {
         return  ei;
     }
 
-    //Diese Methode "bringt" die Abgaben die der Benutzer abgegeben hat
+    
     public ArrayList<Einreichen> get_abgabe_eineskurses(Kurs k) throws StoreException {
         ArrayList<Einreichen> ei = new ArrayList<>();
         try {
@@ -106,7 +106,7 @@ public class AufgabeStore implements Closeable {
         return bw;
     }
 
-    //Gibt eine spezifische Aufgabe eines Kurses aus
+    
     public Aufgabe getAufgabe(int kid, int aNum) throws StoreException
     {
     	Aufgabe res = new Aufgabe();
@@ -236,5 +236,4 @@ public class AufgabeStore implements Closeable {
             }
         }
     }
-
 }

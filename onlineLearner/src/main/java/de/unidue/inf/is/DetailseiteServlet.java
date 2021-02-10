@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//Servlet um die Kursübersicht anzuzeigen
+
 public class DetailseiteServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     Kurs k = new Kurs();
@@ -35,7 +35,6 @@ public class DetailseiteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("my_auf_list", af);
         request.setAttribute("my_k", k);
-        //  request.setAttribute("my_ab_list",ei);
         request.getRequestDispatcher("/detailseite.ftl").forward(request, response);
     }
 
@@ -47,9 +46,9 @@ public class DetailseiteServlet extends HttpServlet {
         ei = as.get_abgabe_eineskurses(k);
         System.out.println("i got here 2");
         for (Einreichen ee : ei) {
-          Bewertung b = new Bewertung();
+            Bewertung b = new Bewertung();
             b = as.get_Bewertung_einerabgabe(ee.getAid());
-           ee.setBewertung(Integer.toString(b.getNote()));
+            ee.setBewertung(Integer.toString(b.getNote()));
             int x = ee.getAnummer();
             for (Aufgabe a : af) {
                 if (a.getAnummer() == x) {

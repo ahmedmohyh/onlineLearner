@@ -28,10 +28,8 @@ public final class KursStore implements Closeable {
     public ArrayList<Kurs> getAvailableCourses() throws StoreException {
         ArrayList<Kurs> result = new ArrayList<>();
 
-        try {
-            //PreparedStatement pstmt = connection.prepareStatement("select * from kurs");
+        try {         
             PreparedStatement pstmt = connection.prepareStatement("select k.kid, k.name as kname , k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer = k.ersteller where k.name not in (select k.name from dbp155.kurs k join dbp155.einschreiben e on k.kid = e.kid where  e.bnummer = 1)");
-            //PreparedStatement pstmt = connection.prepareStatement("select k.name as Kurs_name, k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer=k.ersteller where k.freiePlaetze>0 and k.ersteller !=1");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Kurs k = new Kurs();
@@ -80,7 +78,6 @@ public final class KursStore implements Closeable {
     public ArrayList<Kurs> get_my_courses() throws StoreException {
         ArrayList<Kurs> result = new ArrayList<>();
         try {
-            //PreparedStatement pstmt = connection.prepareStatement("select * from kurs");
             PreparedStatement pstmt = connection.prepareStatement("select k.kid, k.name as kname , k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer = k.ersteller where k.name in (select k.name from dbp155.kurs k join dbp155.einschreiben e on k.kid = e.kid where e.bnummer = 1)");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -122,12 +119,11 @@ public final class KursStore implements Closeable {
     }
 
     public Kurs get_kurs(int KID) throws StoreException {
-        // it will be used for the seak of getting a kurs to show it new enroll page.
         Kurs k = new Kurs();
         String s = Integer.toString(KID);
         try {
             PreparedStatement pstmt = connection.prepareStatement("select k.name as kname, k.freiePlaetze, k.beschreibungstext, k.einschreibeschluessel, k.ersteller, b.name from dbp155.kurs k  join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid= ?");
-            pstmt.setString(1, s); //statt "+s" am Ende der SQL Anweisung
+            pstmt.setString(1, s);
             ResultSet rs = pstmt.executeQuery();
             k.setKid(KID);
             while (rs.next()) {
@@ -147,8 +143,7 @@ public final class KursStore implements Closeable {
     public void deleteCourse(int KID) throws StoreException {
     	try {
     		PreparedStatement pstmt;
-    	
-    		//Abgabe ID's durch gegebene Kurs ID kriegen
+
     		pstmt = connection.prepareStatement("SELECT e.aid FROM dbp155.einreichen e WHERE e.kid = ?");
     		pstmt.setInt(1, KID);
     		ResultSet rs = pstmt.executeQuery();
@@ -156,40 +151,34 @@ public final class KursStore implements Closeable {
     		while(rs.next()) {
     			aufgaben.add(rs.getInt(0));
     		}
-    	
-    		//Einträge aus Tabelle bewerten löschen
+
     		for(Integer aid : aufgaben) {
     			pstmt = connection.prepareStatement("DELETE FROM dbp155.bewerten b WHERE b.aid = ?");
     			pstmt.setInt(1, aid);
     			pstmt.executeUpdate();
     		}
-    	
-    		//Einträge aus Tabelle abgabe löschen
+
     		for(Integer aid : aufgaben) {
     			pstmt = connection.prepareStatement("DELETE FROM dbp155.abgabe a WHERE a.aid = ?");
     			pstmt.setInt(1, aid);
     			pstmt.executeUpdate();
     		}
-    	
-    		//Einträge aus Tabelle einreichen löschen
+
     		for(Integer aid : aufgaben) {
     			pstmt = connection.prepareStatement("DELETE FROM dbp155.einreichen e WHERE e.aid = ? AND e.kid = ?");
     			pstmt.setInt(1, aid);
     			pstmt.setInt(2, KID);
     			pstmt.executeUpdate();
     		}
-    	
-    		//Einträge aus Tabelle aufgabe löschen
+
     		pstmt = connection.prepareStatement("DELETE FROM dbp155.aufgabe a WHERE a.kid = ?");
     		pstmt.setInt(1, KID);
     		pstmt.executeUpdate();
-    	
-    		//Einträge aus Tabelle einschreiben löschen
+
     		pstmt = connection.prepareStatement("DELETE FROM dbp155.einschreiben k WHERE k.kid = ?");
     		pstmt.setInt(1, KID);
     		pstmt.executeUpdate();
-    	
-    		//Eintrag aus Tabelle Kurs löschen
+
     		pstmt = connection.prepareStatement("DELETE FROM dbp155.kurs k WHERE k.kid = ?");
     		pstmt.setInt(1, KID);
     		pstmt.executeUpdate();

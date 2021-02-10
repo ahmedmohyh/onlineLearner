@@ -38,7 +38,6 @@ public class DeleteCourseServlet extends HttpServlet{
 			ks.close();
 			HauptseiteServlet main =  new HauptseiteServlet();
 			main.doGet(request, response);
-		}
-		
+		}		
 	}
 }
