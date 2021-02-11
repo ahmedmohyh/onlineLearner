@@ -29,7 +29,7 @@ public final class KursStore implements Closeable {
         ArrayList<Kurs> result = new ArrayList<>();
 
         try {         
-            PreparedStatement pstmt = connection.prepareStatement("select k.kid, k.name as kname , k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer = k.ersteller where k.name not in (select k.name from dbp155.kurs k join dbp155.einschreiben e on k.kid = e.kid where  e.bnummer = 1)");
+            PreparedStatement pstmt = connection.prepareStatement("select k.kid, k.name as kname , k.freiePlaetze, b.name from dbp155.kurs k join dbp155.benutzer b on b.bnummer = k.ersteller where k.kid not in (select k.kid from dbp155.kurs k join dbp155.einschreiben e on k.kid = e.kid where  e.bnummer = 1) and k.freiePlaetze > 0");
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Kurs k = new Kurs();
